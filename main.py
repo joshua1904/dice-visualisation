@@ -52,6 +52,8 @@ def is_win(current_state: list):
     if current_state.count(current_state[1]) >= 3:
         return True
     return False
+def calculate_y_pos(value: int) -> int:
+    return SCREEN_HEIGHT - value * Y_STEP
 
 
 def sim_round():
@@ -98,8 +100,8 @@ while running:
     screen.blit(text_surface, text_rect)
     for j in range(len(POSITIONS) - 1):
         for i in range(4):
-            pygame.draw.line(screen, COLORS[i], (X_COORDINATE, POSITIONS[j][i] * Y_STEP),
-                             (X_COORDINATE + X_STEP, POSITIONS[j + 1][i] * Y_STEP), LINE_THICKNESS)
+            pygame.draw.line(screen, COLORS[i], (X_COORDINATE, calculate_y_pos(POSITIONS[j][i])),
+                             (X_COORDINATE + X_STEP, calculate_y_pos(POSITIONS[j + 1][i])), LINE_THICKNESS)
         X_COORDINATE += X_STEP
 
     if len(POSITIONS) >= 10:
@@ -113,7 +115,7 @@ while running:
         ROUND = 0
         RESETS += 1
         time.sleep(0.4)
-
+    #pygame.draw.line(screen, "red", (0, SCREEN_HEIGHT), (100, SCREEN_HEIGHT - 100), 5)
     clock.tick(30)
 
 pygame.quit()
