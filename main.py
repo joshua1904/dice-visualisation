@@ -19,7 +19,7 @@ SCREEN_HEIGHT = get_monitors()[0].height
 LINE_THICKNESS = int((SCREEN_HEIGHT / 100) * 0.6)
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 MUSIC = False
 clock = pygame.time.Clock()
 running = True
@@ -33,9 +33,8 @@ RESETS = 0
 WINS = 0
 pygame.font.init()  # you have to call this at the start,
 # if you want to use this module.
-my_font = pygame.font.SysFont('Comic Sans MS', int(SCREEN_HEIGHT /30))
+my_font = pygame.font.SysFont('Comic Sans MS', int(SCREEN_HEIGHT / 30))
 MAX_ROUNDS = 150
-
 
 
 def toggle_music(music):
@@ -43,8 +42,9 @@ def toggle_music(music):
         pygame.mixer.music.set_volume(0.0)
         return False
     else:
-       pygame.mixer.music.set_volume(1.0)
-       return True
+        pygame.mixer.music.set_volume(1.0)
+        return True
+
 
 def is_win(current_state: list):
     if current_state.count(current_state[0]) >= 3:
@@ -52,6 +52,8 @@ def is_win(current_state: list):
     if current_state.count(current_state[1]) >= 3:
         return True
     return False
+
+
 def calculate_y_pos(value: int) -> int:
     return SCREEN_HEIGHT - value * Y_STEP
 
@@ -75,7 +77,7 @@ def normalize_round(removed_list):
 
 while running:
     text_surface = my_font.render(f'Wins: {WINS} rounds: {RESETS + WINS}', "#E8E8E8", "#E8E8E8")
-    text_rect = text_surface.get_rect(center=(SCREEN_WIDTH/ 2, SCREEN_HEIGHT / 100))
+    text_rect = text_surface.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 100))
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -115,7 +117,6 @@ while running:
         ROUND = 0
         RESETS += 1
         time.sleep(0.4)
-    #pygame.draw.line(screen, "red", (0, SCREEN_HEIGHT), (100, SCREEN_HEIGHT - 100), 5)
     clock.tick(30)
 
 pygame.quit()
